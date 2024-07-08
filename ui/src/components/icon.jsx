@@ -1,6 +1,8 @@
 const Icon = ({ show = true, icon = '', style = {} }) =>
     show ? (
-        <i className={icon} style={style} />
+        <span style={{ fontSize: '14px' }}>
+            <i className={icon} style={style} />
+        </span>
     ) : null
 
 export default Icon

@@ -30,7 +30,7 @@ func main() {
 		c.String(http.StatusOK, "OK")
 	})
 
-	r.GET("/file", func(c *gin.Context) {
+	r.GET("/files", func(c *gin.Context) {
 		namespace, pod, container, filePath := c.DefaultQuery("namespace", ""), c.DefaultQuery("pod", ""), c.DefaultQuery("container", ""), c.DefaultQuery("path", "")
 
 		tmpFilePath := path.Join(os.TempDir(), tmpFilePath, uuid.New().String(), filepath.Base(filePath))
@@ -45,7 +45,7 @@ func main() {
 		c.File(tmpFilePath)
 	})
 
-	r.POST("/file", func(c *gin.Context) {
+	r.POST("/files", func(c *gin.Context) {
 		namespace, pod, container, filePath := c.DefaultQuery("namespace", ""), c.DefaultQuery("pod", ""), c.DefaultQuery("container", ""), c.DefaultQuery("path", "")
 
 		file, err := c.FormFile("file")
