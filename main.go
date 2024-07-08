@@ -8,6 +8,7 @@ import (
 	"path"
 	"path/filepath"
 
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
@@ -67,6 +68,8 @@ func main() {
 
 		c.String(http.StatusCreated, "Uploaded")
 	})
+
+	r.Use(static.Serve("/ui", static.LocalFile("ui", true)))
 
 	r.Run()
 }

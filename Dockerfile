@@ -1,3 +1,18 @@
+FROM oven/bun:1.1.3-debian as ui-builder
+
+WORKDIR /src
+
+ADD ./ui/package.json ./ui/package-lock.json ./
+
+RUN npm i --frozen-lockfile
+
+ADD ./ui ./
+
+RUN npm run build && \
+    mkdir ./resources && \
+    cp ./dist/assets/index-*.js ./resources/extension-pod-files.js && \
+    tar -czvf extension.tar.gz ./resources
+
 FROM golang:1.22.5-bookworm as builder
 
 WORKDIR /src
@@ -34,6 +49,7 @@ ENV HOME /home/argocd-extensions-pod-files
 RUN mkdir -p ${HOME} && mkdir -p ${HOME}/ui
 
 COPY --from=builder /src/argocd-extensions-pod-files ${HOME}/argocd-extensions-pod-files
+COPY --from=ui-builder /src/extension.tar.gz ${HOME}/ui/extension.tar.gz
 
 RUN chown -R ${uid}:${gid} ${HOME}
 
