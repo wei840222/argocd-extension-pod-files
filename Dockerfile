@@ -1,10 +1,10 @@
-FROM oven/bun:1.1.3-debian as ui-builder
+FROM node:22.4.0-bookworm as ui-builder
 
 WORKDIR /src
 
 ADD ./ui/package.json ./ui/package-lock.json ./
 
-RUN npm i
+RUN npm i --frozen-lockfile
 
 ADD ./ui ./
 
