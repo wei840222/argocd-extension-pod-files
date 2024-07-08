@@ -4,7 +4,7 @@ WORKDIR /src
 
 ADD ./ui/package.json ./ui/package-lock.json ./
 
-RUN npm i --frozen-lockfile
+RUN npm i
 
 ADD ./ui ./
 
