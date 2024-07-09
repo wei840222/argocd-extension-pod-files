@@ -10,6 +10,7 @@ function App({ application, resource }) {
 
   const [isViewButtonPending, setIsViewButtonPending] = useState(false)
   const [isDownloadButtonPending, setIsDownloadButtonPending] = useState(false)
+  const [isUploadButtonPending, setIsUploadButtonPending] = useState(false)
 
   const openByBlob = async (download = false) => {
     const res = await fetch(`/extensions/pod-files/files?namespace=${resource?.metadata?.namespace}&pod=${resource?.metadata?.name}&container=${container}&path=${filePath}`, {
@@ -51,6 +52,48 @@ function App({ application, resource }) {
       console.error(e)
     } finally {
       setTimeout(() => setIsDownloadButtonPending(false), 1000)
+    }
+  }
+
+  const handleUploadButtonClick = async () => {
+    setIsUploadButtonPending(true)
+    try {
+      const input = document.createElement('input')
+      input.setAttribute('type', 'file')
+      input.style.display = 'none'
+      document.body.appendChild(input)
+      input.addEventListener('cancel', () => setIsUploadButtonPending(false))
+      input.click()
+
+      await new Promise((resolve, reject) => {
+        input.onchange = async e => {
+          if (e.target.files.length !== 1) {
+            reject(Error('only support 1 file'))
+            return
+          }
+
+          const file = e.target.files[0]
+          const data = new FormData()
+          data.append('file', file, file.name)
+
+          await fetch(`/extensions/pod-files/files?namespace=${resource?.metadata?.namespace}&pod=${resource?.metadata?.name}&container=${container}&path=${filePath}`, {
+            method: 'POST',
+            headers: {
+              'ArgoCD-Project-Name': application?.spec?.project,
+              'ArgoCD-Application-Name': `${application?.metadata?.namespace}:${application?.metadata?.name}`
+            },
+            body: data,
+          })
+
+          resolve()
+        }
+      })
+
+      document.body.removeChild(input)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setTimeout(() => setIsUploadButtonPending(false), 1000)
     }
   }
 
@@ -100,11 +143,11 @@ function App({ application, resource }) {
               <button
                 className='argo-button argo-button--base extension-button-small'
                 style={{ marginLeft: '5px' }}
-                onClick={console.log(resource)}
-                disabled={false}>
+                onClick={handleUploadButtonClick}
+                disabled={isUploadButtonPending}>
                 <span className='extension-button-text'>Upload</span>
-                <Spinner show={true} />
-                <Icon show={!true} icon='fa-solid fa-cloud-arrow-up' />
+                <Spinner show={isUploadButtonPending} />
+                <Icon show={!isUploadButtonPending} icon='fa-solid fa-cloud-arrow-up' />
               </button>
             </div>
           </div>
