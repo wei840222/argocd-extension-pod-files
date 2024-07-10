@@ -25,7 +25,14 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
+	r := gin.New()
+
+	r.Use(
+		gin.LoggerWithConfig(gin.LoggerConfig{
+			SkipPaths: []string{"/"},
+		}),
+		gin.Recovery(),
+	)
 
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "OK")

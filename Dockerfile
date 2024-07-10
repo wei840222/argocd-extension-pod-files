@@ -59,4 +59,6 @@ WORKDIR ${HOME}
 
 EXPOSE 8080
 
+ENV GIN_MODE=release
+
 CMD ["./argocd-extensions-pod-files"]
