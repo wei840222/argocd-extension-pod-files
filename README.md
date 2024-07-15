@@ -1,7 +1,7 @@
 # argocd-extensions-pod-files
 An Argo CD extention to upload or download files from pod in Kubernetes.
 
-https://github.com/user-attachments/assets/80476ef7-5a12-4180-9b51-9602721550e8
+https://github.com/user-attachments/assets/ba607c9c-e0f2-4f34-b497-fbb04698519b
 
 ## Usage
 
