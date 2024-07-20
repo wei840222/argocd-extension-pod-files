@@ -34,18 +34,18 @@ Assume you install ArgoCD by this [helm chart](https://github.com/argoproj/argo-
 **Enable Argo CD extension init container**  
 https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml#L1783
 ```yaml
-## Argo CD extension
+## Argo CD extensions
 ## This function in tech preview stage, do expect instability or breaking changes in newer versions.
 ## Ref: https://github.com/argoproj-labs/argocd-extension-installer
-## When you enable extension, you need to configure RBAC of logged in Argo CD user.
-## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/#the-extension-resource
-extension:
+## When you enable extensions, you need to configure RBAC of logged in Argo CD user.
+## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/#the-extensions-resource
+extensions:
   # -- Enable support for Argo CD extension
   enabled: true
 
   ...
 
-  # -- Extension for Argo CD
+  # -- Extensions for Argo CD
   # @default -- `[]` (See [values.yaml])
   ## Ref: https://github.com/argoproj-labs/argocd-extension-metrics#install-ui-extension
   extensionList:
