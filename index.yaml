@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  argocd-extension-pod-files:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2024-07-20T03:28:23.577222181Z"
+    description: A Helm chart for ArgoCD Extension Pod Files
+    digest: ef88677acb373d8eb8b9993bfb2469accab510ef4667083e7de5ffbcb09c8023
+    name: argocd-extension-pod-files
+    type: application
+    urls:
+    - https://github.com/wei840222/argocd-extension-pod-files/releases/download/argocd-extension-pod-files-1.0.1/argocd-extension-pod-files-1.0.1.tgz
+    version: 1.0.1
   argocd-extensions-pod-files:
   - apiVersion: v2
     appVersion: v1.0.0
@@ -31,4 +42,4 @@ entries:
     urls:
     - https://github.com/wei840222/argocd-extensions-pod-files/releases/download/argocd-extensions-pod-files-0.1.0/argocd-extensions-pod-files-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-10T14:24:12.536617544Z"
+generated: "2024-07-20T03:28:23.577236248Z"
