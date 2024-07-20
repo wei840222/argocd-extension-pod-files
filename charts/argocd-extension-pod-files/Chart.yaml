@@ -1,6 +1,6 @@
 apiVersion: v2
-name: argocd-extensions-pod-files
-description: A Helm chart for ArgoCD Extensions Pod Files
+name: argocd-extension-pod-files
+description: A Helm chart for ArgoCD Extension Pod Files
 
 # A chart can be either an 'application' or a 'library' chart.
 #

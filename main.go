@@ -20,7 +20,7 @@ var (
 func init() {
 	tmpFilePath = os.Getenv("TMP_FILE_PATH")
 	if tmpFilePath == "" {
-		tmpFilePath = "argocd-extensions-pod-files"
+		tmpFilePath = "argocd-extension-pod-files"
 	}
 }
 

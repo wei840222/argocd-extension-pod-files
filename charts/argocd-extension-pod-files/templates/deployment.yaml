@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "argocd-extensions-pod-files.fullname" . }}
+  name: {{ include "argocd-extension-pod-files.fullname" . }}
   labels:
-    {{- include "argocd-extensions-pod-files.labels" . | nindent 4 }}
+    {{- include "argocd-extension-pod-files.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      {{- include "argocd-extensions-pod-files.selectorLabels" . | nindent 6 }}
+      {{- include "argocd-extension-pod-files.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "argocd-extensions-pod-files.labels" . | nindent 8 }}
+        {{- include "argocd-extension-pod-files.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,7 +27,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "argocd-extensions-pod-files.serviceAccountName" . }}
+      serviceAccountName: {{ include "argocd-extension-pod-files.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

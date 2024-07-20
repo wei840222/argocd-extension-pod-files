@@ -1,4 +1,4 @@
-module github.com/wei840222/argocd-extensions-pod-files
+module github.com/wei840222/argocd-extension-pod-files
 
 go 1.22.5
 

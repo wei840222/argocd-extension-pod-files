@@ -1,11 +1,11 @@
-# Default values for argocd-extensions-pod-files.
+# Default values for argocd-extension-pod-files.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: ghcr.io/wei840222/argocd-extensions-pod-files
+  repository: ghcr.io/wei840222/argocd-extension-pod-files
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
